@@ -3,6 +3,9 @@ const fs=require("fs");
 var hbs=require("hbs");
 var app=express();
 
+const port=process.env.PORT || 3000;
+
+
 hbs.registerPartials(__dirname+'/views/partials');
 hbs.registerHelper("sayFuckOff",()=>{
   return "Fuck Off!...";
@@ -25,7 +28,7 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.use((req,res,next)=>{
+/*app.use((req,res,next)=>{
   var now=new Date().toString();
   fs.appendFile("./process.log",`${now}\n-URL: ${req.originalUrl}\n-Method: ${req.method}\n`,(err)=>{
     if(err){
@@ -35,7 +38,7 @@ app.use((req,res,next)=>{
   res.render("maintenance",{
     finish:now
   });
-});
+});*/
 app.use(express.static(__dirname+"/public"));
 app.get(["/","/home"],(req,res)=>{
   res.send({
@@ -67,6 +70,6 @@ app.get("/bad",(req,res)=>{
   });
 });
 
-app.listen(3000,()=>{
-  console.log("Server ready to go on port 3000");
+app.listen(port,()=>{
+  console.log(`Server ready to go on port ${port}`);
 });
