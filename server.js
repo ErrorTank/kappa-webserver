@@ -69,7 +69,11 @@ app.get("/bad",(req,res)=>{
     errorMessage:"Bad Gateway"
   });
 });
-
+app.get("/deploy",(req,res)=>{
+  res.render("deploy",{
+    author:"Kappa"
+  });
+});
 app.listen(port,()=>{
   console.log(`Server ready to go on port ${port}`);
 });
